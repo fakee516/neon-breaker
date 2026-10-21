@@ -1,0 +1,168 @@
+:root {
+  --ink: #cfe9ff;
+  --muted: #5d7fa6;
+  --cyan: #3ef2ff;
+  --pink: #ff5bd0;
+  --bg: #04060d;
+}
+
+* { box-sizing: border-box; }
+
+html, body { height: 100%; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  overscroll-behavior: none;
+  -webkit-user-select: none;
+  user-select: none;
+  background: var(--bg);
+  background-image:
+    radial-gradient(1100px 700px at 50% -10%, #0d1b36 0%, #060a16 45%, #04060d 75%),
+    radial-gradient(700px 500px at 85% 110%, rgba(255, 47, 179, 0.06) 0%, transparent 60%);
+  color: var(--ink);
+  font-family: "Segoe UI", "Trebuchet MS", system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(circle at 50% 45%, transparent 55%, rgba(0, 0, 0, 0.55) 100%);
+}
+
+.noscript {
+  margin: 0;
+  padding: 14px;
+  color: #ff8b9b;
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  text-align: center;
+}
+
+.shell {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  padding: 14px;
+  width: 100%;
+}
+
+.frame {
+  position: relative;
+  width: min(94vw, calc(84vh * 1.5), 1360px);
+  aspect-ratio: 3 / 2;
+  border-radius: 16px;
+  overflow: hidden;
+  background: #05070f;
+  box-shadow:
+    0 0 0 1px rgba(62, 242, 255, 0.20),
+    0 0 70px rgba(62, 242, 255, 0.10),
+    0 0 140px rgba(255, 91, 208, 0.06),
+    0 30px 90px rgba(0, 0, 0, 0.7);
+}
+
+#game {
+  display: block;
+  width: 100%;
+  height: 100%;
+  touch-action: none;
+  cursor: crosshair;
+}
+
+.scanlines {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.030) 0,
+    rgba(255, 255, 255, 0.030) 1px,
+    transparent 1px,
+    transparent 3px
+  );
+  opacity: 0.45;
+  mix-blend-mode: overlay;
+}
+
+.glass {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(115deg, rgba(255, 255, 255, 0.05) 0%, transparent 32%, transparent 70%, rgba(255, 255, 255, 0.025) 100%);
+  border-radius: inherit;
+}
+
+.touchbar {
+  display: none;
+  justify-content: center;
+  gap: 8px;
+}
+
+.touchbar button {
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border-radius: 50%;
+  border: 1px solid rgba(62, 242, 255, 0.42);
+  background: rgba(5, 11, 22, 0.72);
+  color: #bff8ff;
+  font: 700 11px/1 "Consolas", monospace;
+  letter-spacing: 1px;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  box-shadow: 0 0 14px rgba(62, 242, 255, 0.14);
+}
+
+.touchbar button:active {
+  transform: scale(0.93);
+  background: rgba(62, 242, 255, 0.16);
+}
+
+.touchbar button.is-off {
+  color: #ff8b9b;
+  border-color: rgba(255, 91, 110, 0.5);
+  box-shadow: 0 0 14px rgba(255, 91, 110, 0.16);
+}
+
+.hint {
+  margin: 0;
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted);
+  text-align: center;
+  user-select: none;
+}
+
+.hint .for-touch { display: none; }
+.hint .rotate-note { display: none; }
+
+@media (hover: none), (pointer: coarse) {
+  .hint .for-desktop { display: none; }
+  .hint .for-touch { display: inline; }
+  .touchbar { display: flex; }
+  #game { cursor: default; }
+  .shell { gap: 8px; padding: 8px; }
+  .frame { width: min(94vw, calc((100vh - 96px) * 1.5), 1360px); }
+}
+
+@media (orientation: portrait) and (hover: none), (orientation: portrait) and (pointer: coarse) {
+  .hint .rotate-note { display: inline; }
+}
+
+@media (max-width: 720px) {
+  .hint { font-size: 9px; letter-spacing: 0.10em; }
+  .shell { gap: 10px; padding: 10px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scanlines { display: none; }
+}

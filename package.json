@@ -1,0 +1,17 @@
+{
+  "name": "neon-breaker",
+  "version": "1.0.0",
+  "private": true,
+  "description": "NEON BREAKER - a neon arcade breakout with procedural levels, power-ups and procedural audio.",
+  "scripts": {
+    "test": "node tests/core.test.js"
+  },
+  "keywords": [
+    "game",
+    "canvas",
+    "breakout",
+    "arcade",
+    "neon"
+  ],
+  "license": "MIT"
+}
