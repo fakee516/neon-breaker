@@ -14,8 +14,15 @@
     <p class="noscript">NEON BREAKER needs JavaScript to run.</p>
   </noscript>
   <main class="shell">
-    <div class="frame">
+    <div class="frame" id="frame">
+      <div class="ambient" aria-hidden="true">
+        <i class="orb orb-a"></i>
+        <i class="orb orb-b"></i>
+        <i class="orb orb-c"></i>
+      </div>
       <canvas id="game" width="960" height="640" aria-label="Neon Breaker game field"></canvas>
+      <div class="vignette" aria-hidden="true"></div>
+      <div class="danger" aria-hidden="true"></div>
       <div class="scanlines" aria-hidden="true"></div>
       <div class="glass" aria-hidden="true"></div>
     </div>
